@@ -13,6 +13,9 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
     console.log("");
 
+    // stakingRewardsContract
+    const stakingRewardsContract = "0x4A73218eF2e820987c59F838906A82455F42D98b";
+
     // reward token
     const QUICK = "0x831753DD7087CaC61aB5644b308642cc1c33Dc13";
 
@@ -25,7 +28,7 @@ async function main() {
     // Deploy StrategyQuickSwap
     const StrategyQuickSwapContract = await ethers.getContractFactory("StrategyQuickSwap");
     const StrategyQuickSwap = await StrategyQuickSwapContract.deploy(
-        "0x4A73218eF2e820987c59F838906A82455F42D98b", // stakingRewardsContract
+        stakingRewardsContract, // stakingRewardsContract
         [QUICK, USDC], // rewardToToken0Path
         [QUICK, WETH], // rewardToToken1Path
         [USDC, WETH], // token0ToRewardPath
@@ -39,7 +42,7 @@ async function main() {
     await hre.run("verify:verify", {
         address: StrategyQuickSwap.address,
         constructorArguments: [
-            "0x4A73218eF2e820987c59F838906A82455F42D98b", // stakingRewardsContract
+            stakingRewardsContract, // stakingRewardsContract
             [QUICK, USDC], // rewardToToken0Path
             [QUICK, WETH], // rewardToToken1Path
             [USDC, WETH], // token0ToRewardPath

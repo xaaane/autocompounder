@@ -62,7 +62,7 @@ contract StrategyQuickSwap is Ownable {
 		_startFarm();
 	}
 
-	function compound() external onlyOwner {
+	function compound() external {
 		// Harvest reward tokens
         IStakingRewards(stakingRewardsContract).getReward();
 
@@ -176,6 +176,10 @@ contract StrategyQuickSwap is Ownable {
 
 	function amountInFarm() public view returns (uint256) {
         return IStakingRewards(stakingRewardsContract).balanceOf(address(this));
+    }
+
+    function farmRewardsPending() public view returns (uint256) {
+        return IStakingRewards(stakingRewardsContract).earned(address(this));
     }
 
     // Helper Functions
