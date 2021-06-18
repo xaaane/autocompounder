@@ -32,7 +32,8 @@ module.exports = {
 			accounts
 	    },
 	    polygon: {
-	    	url: 'https://matic-mainnet.chainstacklabs.com',
+	    	gasPrice: 5100000000, // 5.1 wei
+	    	url: 'https://rpc-mainnet.maticvigil.com',
 	    	accounts
 	    }
 	},
