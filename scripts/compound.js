@@ -8,6 +8,7 @@ const strategy = "0xFb2664aCb25Dc101E8aF4f2f782d90f57a2c1D01";
 console.log("Strategy address:", strategy);
 
 async function main() {
+    compound();
     setInterval(compound,1800000);
 }
 
