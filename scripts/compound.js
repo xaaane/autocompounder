@@ -8,6 +8,10 @@ const strategy = "0xFb2664aCb25Dc101E8aF4f2f782d90f57a2c1D01";
 console.log("Strategy address:", strategy);
 
 async function main() {
+    setInterval(compound,1800000);
+}
+
+async function compound() {
     const [deployer] = await ethers.getSigners();
 
     // Deploy StrategyQuickSwap
@@ -19,16 +23,13 @@ async function main() {
     try {
         await (await StrategyQuickSwap.compound({gasLimit: 800000})).wait();
         log("Strategy compounded! (Balance: " + ethers.utils.formatEther(await deployer.getBalance()) + " MATIC)");
-        // await sleep(300000); // Sleep 5 minutes
-        await sleep(1800000); // Sleep 30 minutes
 
     } catch (error) {
         console.log(error);
         log("Failed to compound strategy, retrying in 5 minutes...");
         await sleep(300000); // Sleep 5 minutes
+        compound();
     }
-    
-    main();
 }
 
 log("Start compounding...");
